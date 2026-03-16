@@ -1,0 +1,19 @@
+{
+  "name": "epg-server",
+  "version": "1.0.0",
+  "description": "EPG HTTP接口服务 - Node.js版本",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "epg",
+    "iptv",
+    "tv-guide"
+  ],
+  "author": "R.tian",
+  "license": "MIT",
+  "dependencies": {
+    "xml2js": "^0.6.2"
+  }
+}
