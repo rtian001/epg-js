@@ -7,13 +7,13 @@ export default async function onRequest(context) {
   const date = params.get('date') || currentDate;
   const eJson = context.waitUntil(fetch('./e.json'));
   const eJsonData = await eJson.json();
-  const epgData = eJsonData[channel][date];
-  const data = {
-    'channel_name': channel,
-    'date': date,
-    'epg_data': epgData,
-  };
-  return new Response(JSON.stringify(data), {
+  // const epgData = eJsonData[channel][date];
+  // const data = {
+  //   'channel_name': channel,
+  //   'date': date,
+  //   'epg_data': epgData,
+  // };
+  return new Response(JSON.stringify(eJsonData), {
     headers: {
       'Content-Type': 'application/json',
     },
