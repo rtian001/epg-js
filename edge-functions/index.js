@@ -9,9 +9,9 @@ export default async function onRequest(context) {
   const eJsonData = await eJson.json();
   const epgData = eJsonData[channel][date];
   const data = {
-    channel_name: channel,
-    date: date,
-    epg_data: epgData,
+    'channel_name': channel,
+    'date': date,
+    'epg_data': epgData,
   };
   return new Response(JSON.stringify(data), {
     headers: {
