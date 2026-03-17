@@ -1,7 +1,10 @@
 export default async function onRequest(context) {
-  const query = context.request.url.split('?')[1];
-  const params = new URLSearchParams(query);
-  const channel = params.get('ch') || 'cctv1';
+  const req = context.request;
+  const url = new URL(req.url);
+  const search = url.search;
+  // const query = context.request.url.split('?')[1];
+  // const params = new URLSearchParams(query);
+  // const channel = params.get('ch') || 'cctv1';
   const currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10).replace(/-/g, '');
   const date = params.get('date') || currentDate;
   var epgData = [];
@@ -9,7 +12,7 @@ export default async function onRequest(context) {
   // const eJsonData = await eJson.json();
   // const epgData = eJsonData[channel][date];
   const data = {
-    'channel_name': channel,
+    'channel_name': 'channel',
     'date': date,
     'epg_data': epgData,
   };
