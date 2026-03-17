@@ -3,7 +3,7 @@ export default async function onRequest(context) {
   const url = new URL(req.url);
   const search = url.search;
   // const query = context.request.url.split('?')[1];
-  // const params = new URLSearchParams(query);
+  const params = new URLSearchParams(search);
   // const channel = params.get('ch') || 'cctv1';
   const currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10).replace(/-/g, '');
   const date = params.get('date') || currentDate;
@@ -16,7 +16,7 @@ export default async function onRequest(context) {
     'date': date,
     'epg_data': epgData,
   };
-  return new Response(JSON.stringify(eJsonData), {
+  return new Response(JSON.stringify(data), {
     headers: {
       'Content-Type': 'application/json',
     },
