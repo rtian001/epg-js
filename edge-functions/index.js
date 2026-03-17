@@ -7,7 +7,7 @@ export default async function onRequest(context) {
   const channel = params.get('ch') || 'cctv1';
   const currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
   const date = params.get('date') || currentDate;
-  const eJson = await fetch('/e.json');
+  const eJson = await fetch('https://epg.ourtv.dpdns.org/e.json');
   const eJsonData = await eJson.json();
   const epgData = eJsonData[channel][date] || [];
   // const epgData = eJsonData[channel][date];
