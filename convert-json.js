@@ -27,26 +27,25 @@ for (const match of programmeMatches) {
   const startHHMM = `${startTime.substring(0, 2)}:${startTime.substring(2, 4)}`;
   const endHHMM = `${endTime.substring(0, 2)}:${endTime.substring(2, 4)}`;
 
-  if (!result[channelKey]) {
-    result[channelKey] = {};
+  if (!result[date]) {
+    result[date] = {};
   }
 
-  if (!result[channelKey][date]) {
-    result[channelKey][date] = [];
+  if (!result[date][channelKey]) {
+    result[date][channelKey] = [];
   }
 
-  result[channelKey][date].push({
+  result[date][channelKey].push({
     start: startHHMM,
     end: endHHMM,
     title: title
   });
 }
+const today = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
+const jsonContent = JSON.stringify(result[today]);
+fs.writeFileSync(`epg-${today}.json`, jsonContent, 'utf-8');
+console.log(`转换完成！已生成 epg-${today}.json`);
 
-const jsonContent = JSON.stringify(result);
-fs.writeFileSync('e.json', jsonContent, 'utf-8');
-console.log('转换完成！已生成 e.json');
-
-const channelCount = Object.keys(result).length;
-const dateCount = Object.values(result).reduce((sum, dates) => sum + Object.keys(dates).length, 0);
-console.log(`共转换 ${channelCount} 个频道，${dateCount} 个日期`);
-console.log(`文件大小：${(fs.statSync('e.json').size / 1024 / 1024).toFixed(2)} MB`);
+const channelCount = Object.values(result).reduce((sum, channels) => sum + Object.keys(channels).length, 0);
+console.log(`共转换 ${channelCount} 个频道`);
+console.log(`文件大小：${(fs.statSync(`epg-${today}.json`).size / 1024 / 1024).toFixed(2)} MB`);
