@@ -9,12 +9,12 @@ export default async function onRequest(context) {
   const date = params.get('date') || currentDate;
   const eJson = await fetch('./e.json');
   const eJsonData = await eJson.json();
-  const epgData = eJsonData[channel][date] || [];
+  // const epgData = eJsonData[channel][date] || [];
   // const epgData = eJsonData[channel][date];
   const data = {
     'channel_name': channel,
     'date': date,
-    'epg_data': epgData,
+    'epg_data': eJsonData
   };
   return new Response(JSON.stringify(data), {
     headers: {
