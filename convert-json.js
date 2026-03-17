@@ -20,7 +20,7 @@ for (const match of programmeMatches) {
   const channelName = channels[channelId] || channelId;
   const channelKey = channelName.toLowerCase().replace(/\s+/g, '');
 
-  const date = startStr.substring(0, 8);
+  const date = `${startStr.substring(0, 4)}-${startStr.substring(4, 6)}-${startStr.substring(6, 8)}`;
   const startTime = startStr.substring(8, 12);
   const endTime = endStr.substring(8, 12);
 
