@@ -2,9 +2,9 @@ export default async function onRequest(context) {
   const req = context.request;
   const url = new URL(req.url);
   const search = url.search;
-  // const query = context.request.url.split('?')[1];
   const params = new URLSearchParams(search);
   const channel = params.get('ch') || 'cctv1';
+  let _channel = channel.toLowerCase();
   const currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
   const date = params.get('date') || currentDate;
   const host = req.headers.get('host');
@@ -45,7 +45,15 @@ export default async function onRequest(context) {
   const eJson = await fetch(`https://${host}/epg-${date}.json`);
   if (eJson.ok) {
     eJsonData = await eJson.json();
-    epgData = eJsonData[channel] || epgData;
+    // 处理cctv频道和地方台模糊查询
+    if (_channel.startsWith('cctv')) {
+      _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
+    } else if (_channel.endsWith('台')) {
+      _channel = _channel.slice(0, -1);
+    } else if (_channel.endsWith('频道')) {
+      _channel = _channel.slice(0, -2);
+    }
+    epgData = eJsonData[_channel] || epgData;
   }
 
   const result = {
