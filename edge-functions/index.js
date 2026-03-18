@@ -45,15 +45,13 @@ export default async function onRequest(context) {
   const eJson = await fetch(`https://${host}/epg-${date}.json`);
   if (eJson.ok) {
     eJsonData = await eJson.json();
+    // 处理cctv频道和地方台模糊查询
     if (_channel.startsWith('cctv')) {
       _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
     } else if (_channel.endsWith('台')) {
       _channel = _channel.slice(0, -1);
     } else if (_channel.endsWith('频道')) {
       _channel = _channel.slice(0, -2);
-    }
-    if (_channel == '凤凰卫视') {
-      _channel = '凤凰中文';
     }
     epgData = eJsonData[_channel] || epgData;
   }
