@@ -11,11 +11,7 @@ export default async function onRequest(context) {
     let epgData = [];
     const eJson = await fetch(`https://${host}/epg-${date}.json`);
     const eJsonData = await eJson.json();
-    if (eJsonData[channel]) {
-        epgData = eJsonData[channel];
-    } else {
-        channel = '未知频道';
-    }
+    epgData = eJsonData[channel];
     const result = {
         'date': date,
         'channel_name': channel,
