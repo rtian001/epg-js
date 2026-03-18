@@ -13,9 +13,13 @@ export default async function onRequest(context) {
         end: '23:59',
         title: '精彩节目'
     }];
+    let eJsonData = {};
     const eJson = await fetch(`https://${host}/epg-${date}.json`);
-    const eJsonData = await eJson.json();
-    epgData = eJsonData[channel] || epgData;
+    if (eJson.ok) {
+        eJsonData = await eJson.json();
+        epgData = eJsonData[channel] || epgData;
+    }
+
     const result = {
         'date': date,
         'channel_name': channel,
