@@ -2,7 +2,6 @@ export default async function onRequest(context) {
     const req = context.request;
     const url = new URL(req.url);
     const search = url.search;
-    // const query = context.request.url.split('?')[1];
     const params = new URLSearchParams(search);
     const channel = params.get('ch') || 'cctv1';
     let _channel = channel.toLowerCase();

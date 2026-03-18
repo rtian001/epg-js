@@ -34,12 +34,13 @@ for (const match of programmeMatches) {
   if (!result[date][channelKey]) {
     result[date][channelKey] = [];
   }
-
-  result[date][channelKey].push({
-    start: startHHMM,
-    end: endHHMM,
-    title: title
-  });
+  if (channelKey != 'noepg') {
+    result[date][channelKey].push({
+      start: startHHMM,
+      end: endHHMM,
+      title: title
+    });
+  }
 }
 
 let cdate = [0, 0];
