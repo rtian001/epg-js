@@ -52,6 +52,9 @@ export default async function onRequest(context) {
     } else if (_channel.endsWith('频道')) {
       _channel = _channel.slice(0, -2);
     }
+    if (_channel == '凤凰卫视') {
+      _channel = '凤凰中文';
+    }
     epgData = eJsonData[_channel] || epgData;
   }
 
