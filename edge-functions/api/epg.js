@@ -46,6 +46,7 @@ export default async function onRequest(context) {
     const eJson = await fetch(`https://${host}/epg-${date}.json`);
     if (eJson.ok) {
         eJsonData = await eJson.json();
+        // 处理cctv频道和地方台模糊查询
         if (_channel.startsWith('cctv')) {
             _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
         }
