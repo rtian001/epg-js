@@ -10,6 +10,34 @@ export default async function onRequest(context) {
     const host = req.headers.get('host');
     let epgData = [{
         start: '00:00',
+        end: '02:59',
+        title: '精彩节目'
+    }, {
+        start: '03:00',
+        end: '05:59',
+        title: '精彩节目'
+    }, {
+        start: '06:00',
+        end: '08:59',
+        title: '精彩节目'
+    }, {
+        start: '09:00',
+        end: '11:59',
+        title: '精彩节目'
+    }, {
+        start: '12:00',
+        end: '14:59',
+        title: '精彩节目'
+    }, {
+        start: '15:00',
+        end: '17:59',
+        title: '精彩节目'
+    }, {
+        start: '18:00',
+        end: '20:59',
+        title: '精彩节目'
+    }, {
+        start: '21:00',
         end: '23:59',
         title: '精彩节目'
     }];
