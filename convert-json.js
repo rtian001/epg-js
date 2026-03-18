@@ -41,7 +41,17 @@ for (const match of programmeMatches) {
     title: title
   });
 }
-const today = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
+let cdate = [0, 0];
+for (let d in result) {
+  dd = Object.keys(result[d]).length;
+  if (dd > cdate[1]) {
+    cdate[1] = dd;
+    cdate[0] = d;
+  }
+}
+
+today = cdate[0];
 const jsonContent = JSON.stringify(result[today]);
 fs.writeFileSync(`epg-${today}.json`, jsonContent, 'utf-8');
 console.log(`转换完成！已生成 epg-${today}.json`);
