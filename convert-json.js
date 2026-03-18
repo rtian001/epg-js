@@ -52,6 +52,7 @@ for (let d in result) {
 }
 
 today = cdate[0];
+
 const jsonContent = JSON.stringify(result[today]);
 fs.writeFileSync(`epg-${today}.json`, jsonContent, 'utf-8');
 console.log(`转换完成！已生成 epg-${today}.json`);
