@@ -8,11 +8,7 @@ export default async function onRequest(context) {
     const currentDate = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
     const date = params.get('date') || currentDate;
     const host = req.headers.get('host');
-    var epgData = [{
-        start: '00:00',
-        end: '23:59',
-        title: '精彩节目'
-    }];
+    let epgData = [];
     const eJson = await fetch(`https://${host}/epg-${date}.json`);
     const eJsonData = await eJson.json();
     if (eJsonData[channel]) {
@@ -20,7 +16,6 @@ export default async function onRequest(context) {
     } else {
         channel = '未知频道';
     }
-    // const epgData = eJsonData[channel][date];
     const result = {
         'date': date,
         'channel_name': channel,
