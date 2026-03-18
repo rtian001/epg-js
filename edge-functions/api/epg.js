@@ -49,13 +49,10 @@ export default async function onRequest(context) {
         // 处理cctv频道和地方台模糊查询
         if (_channel.startsWith('cctv')) {
             _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
-        }
-        if (!eJsonData[_channel]) {
-            if (eJsonData[_channel.slice(0, -2)]) {
-                _channel = _channel.slice(0, -2);
-            } else {
-                _channel = 'noepg';
-            }
+        } else if (_channel.endsWith('台')) {
+            _channel = _channel.slice(0, -1);
+        } else if (_channel.endsWith('频道')) {
+            _channel = _channel.slice(0, -2);
         }
         epgData = eJsonData[_channel] || epgData;
     }
