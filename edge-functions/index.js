@@ -63,7 +63,7 @@ export default async function onRequest(context) {
   };
   return new Response(JSON.stringify(result), {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
   });
 }
