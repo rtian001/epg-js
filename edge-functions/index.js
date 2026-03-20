@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises';
 export default async function onRequest(context) {
   const req = context.request;
   const url = new URL(req.url);
@@ -42,13 +41,10 @@ export default async function onRequest(context) {
     end: '23:59',
     title: '精彩节目'
   }];
-  // let eJsonData = {};
   try{
-  // const eJson = await fetch(`https://${host}/epg-${date}.json`);
-  // if (eJson.ok) {
-    // eJsonData = await eJson.json();
-   const eJsonData=JSON.parse(await fs.readFile(`/epg-${date}.json`, 'utf-8'));
-    if(eJsonData){
+  const eJson = await fetch(`https://${host}/epg-${date}.json`);
+  if (eJson.ok) {
+    const eJsonData = await eJson.json();
     if (_channel.startsWith('cctv')) {
       _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
     } else if (_channel.endsWith('台')) {
