@@ -1,9 +1,9 @@
-// 文件路径 ./edge-functions/api/hello.js
-// 访问路径 example.com/api/hello
-export default function onRequest(context) {
-  return new Response(JSON.stringify({ 'message': 'Hello from Epg!',success: true }), {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+export default async function onRequest(context) {
+  // 通过相对路径读取同目录下的JSON文件
+  const data = await import('/epg-2026-03-21.json', {
+    assert: { type: 'json' }
+  });
+  return new Response(JSON.stringify(data.default), {
+    headers: { 'Content-Type': 'application/json' }
   });
 }
