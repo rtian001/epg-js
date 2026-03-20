@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 export default async function onRequest(context) {
   const req = context.request;
   const url = new URL(req.url);
@@ -46,7 +47,7 @@ export default async function onRequest(context) {
   // const eJson = await fetch(`https://${host}/epg-${date}.json`);
   // if (eJson.ok) {
     // eJsonData = await eJson.json();
-   const {default:eJsonData}=await import(`/epg-${date}.json`,{with:{type:"json"}});
+   const eJsonData=JSON.parse(await fs.readFile(`/epg-${date}.json`, 'utf-8'));
     if(eJsonData){
     if (_channel.startsWith('cctv')) {
       _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
