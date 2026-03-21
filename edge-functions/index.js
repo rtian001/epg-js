@@ -41,12 +41,12 @@ export default async function onRequest(context) {
     end: '23:59',
     title: '精彩节目'
   }];
+  let filename=`../epg-${date}.json`
   try{
     // const eJson = await fetch(`https://${host}/epg-${date}.json`);
     // if (eJson.ok) {
     //   const eJsonData = await eJson.json();
-    let filename=`../epg-${date}.json`
-    let eJsonData = await import(filename, {with: { type: 'json' }});
+    let eJsonData = await import(filename, {assert: { type: 'json' }});
     if(!!eJsonData){
       if (_channel.startsWith('cctv')) {
         _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
@@ -61,7 +61,7 @@ export default async function onRequest(context) {
       epgData = eJsonData[_channel] || epgData;
     }
   }catch(err){
-      epgData={"error":err.name,"message":err.message}
+      epgData={"date":filename,"error":err.name,"message":err.message}
   }
 
   const result = {
