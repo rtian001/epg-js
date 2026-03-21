@@ -41,16 +41,10 @@ export default async function onRequest(context) {
     end: '23:59',
     title: '精彩节目'
   }];
-  let eJson={};
   try{
-    // const eJson = await fetch(`https://${host}/epg-${date}.json`);
-    // if (eJson.ok) {
-    //   const eJsonData = await eJson.json();
-    if(!(date in eJson)){
-      eJson[date] = await import(`../epg-${date}.json`, {assert: { type: 'json' }});
-    }
-    const eJsonData=eJson[date];
-    if(!!eJsonData){
+    const eJson = await fetch(`${host}/epg-${date}.json`);
+    if (eJson.ok) {
+      const eJsonData = await eJson.json();
       if (_channel.startsWith('cctv')) {
         _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
       } else if (_channel.endsWith('台')) {
