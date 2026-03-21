@@ -42,7 +42,7 @@ export default async function onRequest(context) {
     title: '精彩节目'
   }];
   try{
-    const eJson = await fetch(`${host}/epg-${date}.json`);
+    const eJson = await fetch(`https://${host}/epg-${date}.json`);
     if (eJson.ok) {
       const eJsonData = await eJson.json();
       if (_channel.startsWith('cctv')) {
