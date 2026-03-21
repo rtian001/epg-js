@@ -45,8 +45,8 @@ export default async function onRequest(context) {
   // const eJson = await fetch(`https://${host}/epg-${date}.json`);
   // if (eJson.ok) {
   //   const eJsonData = await eJson.json();
-   const eJson =  await import('../epg-2026-03-21.json', {assert: { type: 'json' }});
-    if(eJson){
+   const eJsonData =  await import(`../epg-${date}.json`, {assert: { type: 'json' }});
+    if(eJsonData){
     if (_channel.startsWith('cctv')) {
       _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
     } else if (_channel.endsWith('台')) {
