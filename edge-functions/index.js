@@ -42,9 +42,11 @@ export default async function onRequest(context) {
     title: '精彩节目'
   }];
   try{
-  const eJson = await fetch(`https://${host}/epg-${date}.json`);
-  if (eJson.ok) {
-    const eJsonData = await eJson.json();
+  // const eJson = await fetch(`https://${host}/epg-${date}.json`);
+  // if (eJson.ok) {
+  //   const eJsonData = await eJson.json();
+   const eJson =  await import('../epg-2026-03-21.json', {assert: { type: 'json' }});
+    if(eJson){
     if (_channel.startsWith('cctv')) {
       _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
     } else if (_channel.endsWith('台')) {
