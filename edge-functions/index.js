@@ -42,23 +42,23 @@ export default async function onRequest(context) {
     title: '精彩节目'
   }];
   try{
-  // const eJson = await fetch(`https://${host}/epg-${date}.json`);
-  // if (eJson.ok) {
-  //   const eJsonData = await eJson.json();
-   const eJsonData =  await import(`../epg-${date}.json`, {assert: { type: 'json' }});
-    if(eJsonData){
-    if (_channel.startsWith('cctv')) {
-      _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
-    } else if (_channel.endsWith('台')) {
-      _channel = _channel.slice(0, -1);
-    } else if (_channel.endsWith('频道')) {
-      _channel = _channel.slice(0, -2);
-    };
-    if(_channel=='凤凰卫视'){
-        _channel='凤凰中文'
+    // const eJson = await fetch(`https://${host}/epg-${date}.json`);
+    // if (eJson.ok) {
+    //   const eJsonData = await eJson.json();
+    const eJsonData =  await import(`../epg-2026-03-20.json`, {assert: { type: 'json' }});
+    if(!!eJsonData){
+      if (_channel.startsWith('cctv')) {
+        _channel = _channel.replace(/-/g, '').replace(/[^\x00-\xff]/g, '');
+      } else if (_channel.endsWith('台')) {
+        _channel = _channel.slice(0, -1);
+      } else if (_channel.endsWith('频道')) {
+        _channel = _channel.slice(0, -2);
+      };
+      if(_channel=='凤凰卫视'){
+          _channel='凤凰中文'
+      }
+      epgData = eJsonData[_channel] || epgData;
     }
-    epgData = eJsonData[_channel] || epgData;
-  }
   }catch(err){
       epgData={"error":err.name,"message":err.message}
   }
