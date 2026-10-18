@@ -4,3 +4,10 @@
 > 适用于TVBOX/DIYP将 epg 数据转换为 json 格式
 > 支持自定义日期范围
 > 支持自定义频道
+
+```
+https://epg.cdn.loc.cc/
+https://epg.51zmt.top:8001/
+https://github.com/celetor/epg
+
+```
