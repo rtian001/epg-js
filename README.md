@@ -11,3 +11,4 @@ https://epg.51zmt.top:8001/
 https://github.com/celetor/epg
 
 ```
+> 下载：https://epg.cdn.loc.cc/xml
