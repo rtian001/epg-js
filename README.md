@@ -12,6 +12,7 @@ https://github.com/celetor/epg
 
 ```
 > 下载：https://epg.cdn.loc.cc/xml
+
 EPG源
 在“列表配置-EPG订阅”中填入EPG源即可看到节目信息。
 
